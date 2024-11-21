@@ -1,4 +1,4 @@
-# Parcial#2
+# Enunciado parcial #2 Desarrollo de software en Equipo 2024-02
 
 Se debe desarrollar una aplicación angular que permita visualizar Pokémons y sus detalles. 
 
