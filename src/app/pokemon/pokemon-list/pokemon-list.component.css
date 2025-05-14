@@ -1,0 +1,89 @@
+/* Colores de fondo y texto para cada tipo de Pokémon */
+.type-fire     { background-color: #F08030; color: #fff; }
+.type-water    { background-color: #6890F0; color: #fff; }
+.type-grass    { background-color: #78C850; color: #fff; }
+.type-electric { background-color: #F8D030; color: #fff; }
+.type-ice      { background-color: #98D8D8; color: #000; }
+.type-fighting { background-color: #C03028; color: #fff; }
+.type-poison   { background-color: #A040A0; color: #fff; }
+.type-ground   { background-color: #E0C068; color: #000; }
+.type-flying   { background-color: #A890F0; color: #000; }
+.type-psychic  { background-color: #F85888; color: #fff; }
+.type-bug      { background-color: #A8B820; color: #000; }
+.type-rock     { background-color: #B8A038; color: #000; }
+.type-ghost    { background-color: #705898; color: #fff; }
+.type-dragon   { background-color: #7038F8; color: #fff; }
+.type-dark     { background-color: #705848; color: #fff; }
+.type-steel    { background-color: #B8B8D0; color: #000; }
+.type-fairy    { background-color: #EE99AC; color: #000; }
+.type-normal   { background-color: #A8A878; color: #000; }
+
+/* Clase por defecto si no coincide ningún tipo */
+.type-default  { background-color: #777; color: #fff; }
+
+/* Opcional: un pequeño efecto hover */
+.type-fire:hover,
+.type-water:hover,
+.type-grass:hover,
+.type-electric:hover,
+.type-ice:hover,
+.type-fighting:hover,
+.type-poison:hover,
+.type-ground:hover,
+.type-flying:hover,
+.type-psychic:hover,
+.type-bug:hover,
+.type-rock:hover,
+.type-ghost:hover,
+.type-dragon:hover,
+.type-dark:hover,
+.type-steel:hover,
+.type-fairy:hover,
+.type-normal:hover,
+.type-default:hover {
+  filter: brightness(1.1);
+}
+
+/* styles.css */
+.btn-modern {
+  transition: transform 0.2s, filter 0.2s;
+}
+.btn-modern:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+
+/* Base para cada “tile” de tipo */
+.type-tile {
+  display: inline-block;
+  width: 100%;               /* ocupa toda la columna */
+  max-width: 150px;          /* no demasiado ancho */
+  padding: 0.5rem 0;         /* vertical algo de espacio, horizontal automático */
+  border: none;
+  border-radius: 0.85rem;    /* esquinas suaves */
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  cursor: pointer;
+}
+
+/* Espacio entre tiles y responsive */
+@media (min-width: 576px) {
+  .type-tile {
+    max-width: 140px;
+  }
+}
+
+@media (min-width: 768px) {
+  .type-tile {
+    max-width: 160px;
+  }
+}
+
+/* Hover ligero */
+.type-tile:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}

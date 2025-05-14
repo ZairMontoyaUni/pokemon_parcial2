@@ -1,0 +1,59 @@
+<!-- type-list.component.html -->
+<div class="container mt-4">
+  <h2 class="mb-3">Pokémons de tipo {{ typeName }}</h2>
+
+  <!-- Botones para alternar modo -->
+  <div class="mb-3">
+    <button 
+      class="btn btn-outline-primary me-2" 
+      [class.active]="viewMode === 'list'"
+      (click)="showList()"
+    >
+      Lista
+    </button>
+    <button 
+      class="btn btn-outline-primary" 
+      [class.active]="viewMode === 'grid'"
+      (click)="showGrid()"
+    >
+      Cuadrícula
+    </button>
+  </div>
+
+  <!-- Indicadores de carga y error -->
+  <div *ngIf="cargando" class="text-center">Cargando…</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <!-- VISTA DE LISTA -->
+  <ul *ngIf="!cargando && !error && viewMode === 'list'" class="list-group">
+    <li *ngFor="let a of pokemons" class="list-group-item d-flex align-items-center">
+      <img
+        [src]="a.sprites.front_default"
+        alt="Imagen de {{ a.name }}"
+        class="me-3"
+        width="50"
+        height="50"
+      />
+      <strong>{{ a.name }}</strong>
+    </li>
+  </ul>
+
+  <!-- VISTA DE CUADRÍCULA -->
+  <div *ngIf="!cargando && !error && viewMode === 'grid'" class="row row-cols-2 row-cols-md-4 g-3">
+    <div *ngFor="let a of pokemons" class="col">
+      <div class="card h-100 text-center">
+        <img
+          [src]="a.sprites.front_default"
+          alt="Imagen de {{ a.name }}"
+          class="card-img-top mx-auto mt-3"
+          style="width: 80px; height: 80px;"
+        />
+        <div class="card-body">
+          <h6 class="card-title">{{ a.name }}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a routerLink="/" class="btn btn-link mt-3">← Volver al listado principal</a>
+</div>

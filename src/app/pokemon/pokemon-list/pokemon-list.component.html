@@ -1,0 +1,110 @@
+<button class="btn btn-danger ml-3"
+        (click)="loadPokemones()"> 
+        pokemones</button>
+
+<button class="btn btn-danger ml-4"
+        (click)="updateTypeCounts()"> 
+        tipos</button>
+
+    <!-- Mientras cargando === true -->
+    <div *ngIf="cargando" class="text-center my-3">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p>Cargando conteo de tipos…</p>
+    </div>
+
+    <!-- Cuando ya terminó de cargar -->
+    <div *ngIf="!cargando && typeCounts.length > 0" class="mt-4">
+    <h5 class="text-center mb-3">Pokémons por tipo:</h5>
+
+    <!-- Grid: 4 columnas en todos los tamaños, gutter 3 -->
+    <div class="row row-cols-4 g-3">
+      <div *ngFor="let tc of typeCounts" class="col text-center">
+        <a
+          [routerLink]="['/types', tc.name]"
+          class="type-tile btn-modern"
+          [ngClass]="getTypeClass(tc.name)"
+        >
+          {{ tc.name }}: {{ tc.count }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Si no hay datos tras la carga -->
+    <div *ngIf="!cargando && typeCounts.length === 0" class="mt-4 text-center text-muted">
+      No se pudo mostrar el conteo
+    </div>
+
+
+
+
+<div class="container-fluid mt-2 mb-4">
+  <h2 class="text-center">Pokemones </h2>
+  <h5 class="text-center"> --Dar click para mayor información--</h5>
+  <div *ngIf="pokemon.length === 0" class="text-center">
+    No hay pokemones en la lista.
+  </div>
+
+    <div class="row">
+      <div *ngFor="let a of pokemon" class="col-md-4 mb-3">
+        <div class="card h-100" (click)="verDetalle(a)" style="cursor: pointer;">
+          <div class="card-body">
+            <h5 class="card-title">{{ a.name }} ({{ a.id }})</h5>
+            <p class="card-text">
+              Peso: {{ a.weight }}<br>
+              Altura: {{ a.height }}<br>
+              Habilidades: {{ getAbilitiesNames(a.abilities) }}<br>
+              Tipos: {{ getTypesNames(a.types) }}<br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="pokemonModal" tabindex="-1" aria-labelledby="pokemonModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" *ngIf="pokemonSeleccionado">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pokemonModalLabel">
+              {{ pokemonSeleccionado.name }} ({{ pokemonSeleccionado.id }})
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <img
+              [src]="pokemonSeleccionado.sprites.front_default"
+              alt="Imagen del Pokémon"
+              class="img-fluid mb-3"
+            />
+            <p><strong>Peso:</strong> {{ pokemonSeleccionado.weight }}</p>
+            <p><strong>Altura:</strong> {{ pokemonSeleccionado.height }}</p>
+            <p><strong>Habilidades:</strong> {{ getAbilitiesNames(pokemonSeleccionado.abilities) }}</p>
+           <p><strong>Tipos:</strong></p>
+          <ul class="list-inline">
+            <li *ngFor="let t of pokemonSeleccionado.types" class="list-inline-item">
+              <a
+                [routerLink]="['/types', t.type.name]"
+                data-bs-dismiss="modal"
+                class="btn text-white rounded-pill shadow btn-modern px-3 py-2"
+                [ngClass]="getTypeClass(t.type.name)"
+              >
+                {{ t.type.name }}
+              </a>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</div>
+
+
+
+
